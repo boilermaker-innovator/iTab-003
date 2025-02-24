@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iTabs Teaser Popup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <p>Discover more about <span class="itab-link" id="itabsTrigger">iTabs<span class="itab-icon">i</span></span></p>
+        
+        <!-- iTabs Popup -->
+        <div class="itab-popup" id="itabsPopup" role="dialog" aria-hidden="true">
+            <div class="popup-header">
+                <div class="popup-title">
+                    <span class="popup-i-icon">i</span>
+                    <h2 class="popup-heading">iTabs</h2>
+                    <span class="header-info">
+                        <span class="header-i-icon" id="headerInfoIcon">i</span>
+                        <div class="info-tooltip" id="infoTooltip">
+                            <div class="info-tooltip-title">About iTabs</div>
+                            <p>This popup demonstrates iTabs in action. Explore the tabs to learn more!</p>
+                        </div>
+                    </span>
+                </div>
+                <p class="popup-subtitle">Bridging the gaps in digital experience</p>
+            </div>
+            <div class="popup-tabs">
+                <button class="popup-tab active" data-tab="concept">Concept</button>
+                <button class="popup-tab" data-tab="benefits">Benefits</button>
+                <button class="popup-tab" data-tab="usage">Usage</button>
+            </div>
+            <div id="concept" class="popup-content active">
+                <p>iTabs transforms the familiar information icon (i) into a powerful bridge between casual browsing and detailed engagement.</p>
+                <ul>
+                    <li><strong>Surface engagement</strong> to deep understanding</li>
+                    <li><strong>Official messaging</strong> to community perspectives</li>
+                    <li><strong>Mobile browsing</strong> to rich content</li>
+                </ul>
+            </div>
+            <div id="benefits" class="popup-content">
+                <p>iTabs delivers measurable impact:</p>
+                <ul>
+                    <li><strong>45%</strong> increase in time on page</li>
+                    <li><strong>32%</strong> higher conversion rates</li>
+                    <li><strong>73%</strong> faster information finding</li>
+                </ul>
+            </div>
+            <div id="usage" class="popup-content">
+                <p>Implementation is simple:</p>
+                <ol>
+                    <li>Identify key user information</li>
+                    <li>Create iTabs with our no-code builder</li>
+                    <li>Deploy with copy/paste</li>
+                </ol>
+            </div>
+            <a href="https://example.com" class="popup-cta">Learn More</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
