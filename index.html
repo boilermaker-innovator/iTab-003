@@ -2,64 +2,803 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iTabs Teaser Popup</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>iTabs Demo with Reaction</title>
+    <style>
+        :root {
+            --primary-color: #2962ff;
+            --primary-dark: #0039cb;
+            --primary-light: #e9f0ff;
+            --text-color: #333333;
+            --light-text: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f7fa;
+            padding: 20px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            padding: 30px;
+            position: relative;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background-color: var(--primary-light);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .itab-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--primary-color);
+            cursor: pointer;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .itab-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 16px;
+            height: 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 10px;
+            margin-left: 4px;
+        }
+
+        .itab-popup {
+            display: none;
+            position: fixed; /* Changed to fixed for consistency */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            width: 90vw;
+            max-width: 400px;
+            z-index: 1000;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .popup-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 15px;
+            position: relative;
+        }
+
+        .popup-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .popup-i-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            color: var(--primary-color);
+            border-radius: 50%;
+            font-weight: bold;
+            font-style: italic;
+            font-size: 16px;
+            margin-right: 8px;
+        }
+
+        .header-info {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .header-i-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50%;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .info-tooltip {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 250px;
+            background: white;
+            color: var(--text-color);
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1100;
+            font-style: normal;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .info-tooltip:after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: 10px;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid white;
+        }
+
+        .info-tooltip-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+
+        .popup-heading {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .popup-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .popup-tabs {
+            display: flex;
+            background-color: #f0f2f5;
+        }
+
+        .popup-tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px 5px;
+            background-color: #e1e6f0;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .popup-tab.active {
+            background-color: white;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .popup-content {
+            padding: 15px;
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .popup-content.active {
+            display: block;
+        }
+
+        .popup-cta {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .popup-cta:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .reaction-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            background: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .reaction-button:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .reaction-emoji {
+            font-size: 24px;
+            margin-right: 4px;
+        }
+
+        .info-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .count-badge {
+            background: #f0f2f5;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 8px;
+            color: #555;
+        }
+
+        .emoji-popup {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border: 1px solid rgba(0,0,0,0.1);
+            min-width: 280px;
+            z-index: 1000;
+        }
+
+        .emoji-popup.active {
+            display: block;
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: translateY(10px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .popup-section {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .emoji-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .emoji-option {
+            font-size: 24px;
+            padding: 8px;
+            border: none;
+            background: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .emoji-option:hover {
+            background-color: #f0f2f5;
+            transform: scale(1.1);
+        }
+
+        .emoji-option.selected {
+            background-color: #e7f0ff;
+            transform: scale(1.1);
+        }
+
+        .preset-comments {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .preset-comment {
+            text-align: left;
+            padding: 8px 12px;
+            border: none;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #333;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .preset-comment:hover {
+            background-color: #e7f0ff;
+            color: var(--primary-color);
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: none;
+            margin: 10px 0;
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(41,98,255,0.1);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .action-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .cancel-button {
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .cancel-button:hover {
+            background-color: #e4e6eb;
+        }
+
+        .submit-button {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .submit-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .popup-arrow {
+            position: absolute;
+            bottom: -8px;
+            right: 24px;
+            width: 16px;
+            height: 16px;
+            background: white;
+            transform: rotate(45deg);
+            border-right: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .tap-hint {
+            position: absolute;
+            bottom: 70px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tap-hint.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 1024px) {
+            .itab-popup {
+                width: 85vw;
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .itab-popup {
+                width: 90vw;
+                max-width: 400px;
+            }
+            .info-tooltip {
+                width: 220px;
+                right: -10px;
+            }
+            .info-tooltip:after {
+                right: 20px;
+            }
+        }
+
+        @media (orientation: landscape) and (max-height: 768px) {
+            .itab-popup {
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <p>Discover more about <span class="itab-link" id="itabsTrigger">iTabs<span class="itab-icon">i</span></span></p>
-        
-        <!-- iTabs Popup -->
-        <div class="itab-popup" id="itabsPopup" role="dialog" aria-hidden="true">
-            <div class="popup-header">
-                <div class="popup-title">
-                    <span class="popup-i-icon">i</span>
-                    <h2 class="popup-heading">iTabs</h2>
-                    <span class="header-info">
-                        <span class="header-i-icon" id="headerInfoIcon">i</span>
-                        <div class="info-tooltip" id="infoTooltip">
-                            <div class="info-tooltip-title">About iTabs</div>
-                            <p>This popup demonstrates iTabs in action. Explore the tabs to learn more!</p>
-                        </div>
-                    </span>
-                </div>
-                <p class="popup-subtitle">Bridging the gaps in digital experience</p>
+        <div class="story-card">
+            <h1>The iTabDigital Bridge</h1>
+            <p>Sarah, a digital marketing director, faced a common problem: customers were abandoning product pages because they couldn't find key information without excessive scrolling or navigating away.</p>
+            <div class="highlight">
+                <p>"We need to bridge the gap between quick browsing and detailed information," she realized. "People want details, but they don't want clutter."</p>
             </div>
-            <div class="popup-tabs">
-                <button class="popup-tab active" data-tab="concept">Concept</button>
-                <button class="popup-tab" data-tab="benefits">Benefits</button>
-                <button class="popup-tab" data-tab="usage">Usage</button>
+            <p>The solution came from observing how people naturally interact with information icons. Sarah and her team developed <span class="itab-link" id="itabsTrigger">iTabs<span class="itab-icon">i</span></span>, transforming the humble information icon into an interactive bridge between surface browsing and detailed engagement.</p>
+            <p>The results were dramatic: 45% increased engagement, 32% higher conversion rates, and significantly improved customer satisfaction as people found what they needed without disrupting their browsing experience.</p>
+
+            <div class="tap-hint" id="tapHint">
+                Single tap to like • Double tap for more options
             </div>
-            <div id="concept" class="popup-content active">
-                <p>iTabs transforms the familiar information icon (i) into a powerful bridge between casual browsing and detailed engagement.</p>
-                <ul>
-                    <li><strong>Surface engagement</strong> to deep understanding</li>
-                    <li><strong>Official messaging</strong> to community perspectives</li>
-                    <li><strong>Mobile browsing</strong> to rich content</li>
-                </ul>
-            </div>
-            <div id="benefits" class="popup-content">
-                <p>iTabs delivers measurable impact:</p>
-                <ul>
-                    <li><strong>45%</strong> increase in time on page</li>
-                    <li><strong>32%</strong> higher conversion rates</li>
-                    <li><strong>73%</strong> faster information finding</li>
-                </ul>
-            </div>
-            <div id="usage" class="popup-content">
-                <p>Implementation is simple:</p>
-                <ol>
-                    <li>Identify key user information</li>
-                    <li>Create iTabs with our no-code builder</li>
-                    <li>Deploy with copy/paste</li>
-                </ol>
-            </div>
-            <a href="https://example.com" class="popup-cta">Learn More</a>
+            <button class="reaction-button" id="reactionButton" aria-label="React to this story">
+                <span class="reaction-emoji" id="selectedEmoji">👍</span>
+                <span class="info-icon">i</span>
+                <span class="count-badge" id="reactionCount">0</span>
+            </button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="itab-popup" id="itabsPopup" role="dialog" aria-hidden="true">
+        <div class="popup-header">
+            <div class="popup-title">
+                <span class="popup-i-icon">i</span>
+                <h2 class="popup-heading">iTabs</h2>
+                <span class="header-info">
+                    <span class="header-i-icon" id="headerInfoIcon">i</span>
+                    <div class="info-tooltip" id="infoTooltip">
+                        <div class="info-tooltip-title">About This Demo</div>
+                        <p>This interactive presentation demonstrates iTabs in action. You're experiencing the very concept being explained!</p>
+                        <p>The tabs below show different aspects of the iTabs system. Click them to explore more information.</p>
+                        <p>For a more comprehensive demonstration, click "See Full Demonstration" below.</p>
+                    </div>
+                </span>
+            </div>
+            <p class="popup-subtitle">Bridging the gaps in digital experience</p>
+        </div>
+        <div class="popup-tabs">
+            <button class="popup-tab active" data-tab="concept">Concept</button>
+            <button class="popup-tab" data-tab="benefits">Benefits</button>
+            <button class="popup-tab" data-tab="usage">Usage</button>
+        </div>
+        <div id="concept" class="popup-content active">
+            <p>iTabs transforms the familiar information icon (i) into a powerful bridge between casual browsing and detailed engagement.</p>
+            <p>Our solution creates seamless pathways between:</p>
+            <ul>
+                <li><strong>Surface engagement</strong> and deep understanding</li>
+                <li><strong>Official messaging</strong> and community perspectives</li>
+                <li><strong>Mobile browsing</strong> and rich content</li>
+            </ul>
+            <p>By placing contextual information exactly where users need it, iTabs solves the "too much information vs. too little context" problem that plagues digital experiences.</p>
+        </div>
+        <div id="benefits" class="popup-content">
+            <p>iTabs delivers measurable business impact:</p>
+            <ul>
+                <li><strong>45%</strong> increase in time on page</li>
+                <li><strong>32%</strong> higher conversion rates</li>
+                <li><strong>73%</strong> faster information finding</li>
+                <li><strong>27%</strong> reduction in mobile bounce rate</li>
+            </ul>
+            <p>Perfect for any business where information clarity drives decisions:</p>
+            <ul>
+                <li>E-commerce product details</li>
+                <li>SaaS feature explanations</li>
+                <li>Financial service disclosures</li>
+                <li>Healthcare information</li>
+                <li>Travel booking options</li>
+            </ul>
+        </div>
+        <div id="usage" class="popup-content">
+            <p>Implementation is remarkably simple:</p>
+            <ol>
+                <li>Identify key information your users need</li>
+                <li>Create iTabs with our no-code builder</li>
+                <li>Deploy anywhere with simple copy/paste</li>
+            </ol>
+            <p>Works seamlessly with your existing:</p>
+            <ul>
+                <li>Content management systems</li>
+                <li>E-commerce platforms</li>
+                <li>Marketing automation tools</li>
+                <li>Email campaigns</li>
+                <li>Social media content</li>
+            </ul>
+        </div>
+        <a href="https://example.com" class="popup-cta">See Full Demonstration</a>
+    </div>
+
+    <div class="emoji-popup" id="emojiPopup" role="dialog" aria-hidden="true">
+        <div class="popup-section">
+            <div class="section-title">Choose Reaction</div>
+            <div class="emoji-grid">
+                <button class="emoji-option selected" data-emoji="👍">👍</button>
+                <button class="emoji-option" data-emoji="❤️">❤️</button>
+                <button class="emoji-option" data-emoji="🎉">🎉</button>
+                <button class="emoji-option" data-emoji="👏">👏</button>
+                <button class="emoji-option" data-emoji="💡">💡</button>
+                <button class="emoji-option" data-emoji="🙌">🙌</button>
+                <button class="emoji-option" data-emoji="💪">💪</button>
+                <button class="emoji-option" data-emoji="🙏">🙏</button>
+            </div>
+        </div>
+        <div class="popup-section">
+            <div class="section-title">Quick Comments</div>
+            <div class="preset-comments">
+                <button class="preset-comment">This is really helpful!</button>
+                <button class="preset-comment">Great innovation!</button>
+                <button class="preset-comment">Love this idea!</button>
+                <button class="preset-comment">Can't wait to try it!</button>
+            </div>
+        </div>
+        <div class="popup-section">
+            <textarea class="comment-input" placeholder="Or write your own comment..." rows="2"></textarea>
+            <div class="action-buttons">
+                <button class="action-button cancel-button" id="cancelButton">Cancel</button>
+                <button class="action-button submit-button" id="submitButton">Submit</button>
+            </div>
+        </div>
+        <div class="popup-arrow"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainTrigger = document.getElementById('itabsTrigger');
+            const headerInfoIcon = document.getElementById('headerInfoIcon');
+            const infoTooltip = document.getElementById('infoTooltip');
+            const mainPopup = document.getElementById('itabsPopup');
+            const tabButtons = document.querySelectorAll('.popup-tab');
+            const tabContents = document.querySelectorAll('.popup-content');
+            const reactionButton = document.getElementById('reactionButton');
+            const emojiPopup = document.getElementById('emojiPopup');
+            const selectedEmoji = document.getElementById('selectedEmoji');
+            const reactionCount = document.getElementById('reactionCount');
+            const tapHint = document.getElementById('tapHint');
+            const cancelButton = document.getElementById('cancelButton');
+            const submitButton = document.getElementById('submitButton');
+
+            let isTooltipVisible = false;
+            let count = 0;
+            let hasReacted = false;
+            let lastTap = 0;
+            let tapTimeout;
+
+            const toggleITabsPopup = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const isVisible = mainPopup.style.display === 'block';
+                mainPopup.style.display = isVisible ? 'none' : 'block';
+                mainPopup.setAttribute('aria-hidden', isVisible ? 'true' : 'false');
+                infoTooltip.style.display = 'none';
+                isTooltipVisible = false;
+            };
+
+            mainTrigger.addEventListener('click', toggleITabsPopup);
+            mainTrigger.addEventListener('touchstart', toggleITabsPopup, { passive: false });
+
+            headerInfoIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isTooltipVisible = !isTooltipVisible;
+                infoTooltip.style.display = isTooltipVisible ? 'block' : 'none';
+            });
+
+            headerInfoIcon.addEventListener('touchstart', (e) => {
+                e.stopPropagation();
+                isTooltipVisible = !isTooltipVisible;
+                infoTooltip.style.display = isTooltipVisible ? 'block' : 'none';
+            }, { passive: false });
+
+            tabButtons.forEach(button => {
+                const switchTab = (e) => {
+                    e.stopPropagation();
+                    const tabId = button.getAttribute('data-tab');
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(tabId).classList.add('active');
+                    infoTooltip.style.display = 'none';
+                    isTooltipVisible = false;
+                };
+                button.addEventListener('click', switchTab);
+                button.addEventListener('touchstart', switchTab, { passive: false });
+            });
+
+            document.addEventListener('click', () => {
+                mainPopup.style.display = 'none';
+                mainPopup.setAttribute('aria-hidden', 'true');
+                infoTooltip.style.display = 'none';
+                isTooltipVisible = false;
+                emojiPopup.classList.remove('active');
+                emojiPopup.setAttribute('aria-hidden', 'true');
+            });
+
+            mainPopup.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (e.target !== headerInfoIcon && !headerInfoIcon.contains(e.target) && 
+                    e.target !== infoTooltip && !infoTooltip.contains(e.target)) {
+                    infoTooltip.style.display = 'none';
+                    isTooltipVisible = false;
+                }
+            });
+
+            infoTooltip.addEventListener('click', (e) => e.stopPropagation());
+
+            reactionButton.addEventListener('mouseenter', () => {
+                tapHint.classList.add('active');
+                setTimeout(() => tapHint.classList.remove('active'), 2000);
+            });
+
+            reactionButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const currentTime = Date.now();
+                const tapLength = currentTime - lastTap;
+                clearTimeout(tapTimeout);
+
+                if (tapLength < 300 && tapLength > 0) {
+                    emojiPopup.classList.add('active');
+                    emojiPopup.setAttribute('aria-hidden', 'false');
+                } else {
+                    tapTimeout = setTimeout(() => {
+                        if (!hasReacted) {
+                            count++;
+                            hasReacted = true;
+                            reactionCount.textContent = count;
+                            selectedEmoji.style.transform = 'scale(1.2)';
+                            setTimeout(() => selectedEmoji.style.transform = 'scale(1)', 200);
+                        }
+                    }, 300);
+                }
+                lastTap = currentTime;
+            });
+
+            document.querySelectorAll('.emoji-option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const emoji = option.dataset.emoji;
+                    document.querySelectorAll('.emoji-option').forEach(opt => 
+                        opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    selectedEmoji.textContent = emoji;
+                });
+            });
+
+            document.querySelectorAll('.preset-comment').forEach(preset => {
+                preset.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    document.querySelector('.comment-input').value = preset.textContent;
+                });
+            });
+
+            cancelButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                emojiPopup.classList.remove('active');
+                emojiPopup.setAttribute('aria-hidden', 'true');
+                document.querySelector('.comment-input').value = '';
+            });
+
+            submitButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const emoji = document.querySelector('.emoji-option.selected').dataset.emoji;
+                const comment = document.querySelector('.comment-input').value;
+                console.log('Submitted:', { emoji, comment });
+                if (!hasReacted) {
+                    count++;
+                    hasReacted = true;
+                    reactionCount.textContent = count;
+                }
+                emojiPopup.classList.remove('active');
+                emojiPopup.setAttribute('aria-hidden', 'true');
+                document.querySelector('.comment-input').value = '';
+            });
+
+            emojiPopup.addEventListener('click', (e) => e.stopPropagation());
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    mainPopup.style.display = 'none';
+                    mainPopup.setAttribute('aria-hidden', 'true');
+                    infoTooltip.style.display = 'none';
+                    isTooltipVisible = false;
+                    emojiPopup.classList.remove('active');
+                    emojiPopup.setAttribute('aria-hidden', 'true');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
