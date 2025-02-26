@@ -2,6 +2,545 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Consulting Quick Profile</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #2563eb;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-align: center;
+        }
+        
+        p.intro {
+            color: #64748b;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .question:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .question-text {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+        
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .checkbox-option, .radio-option {
+            display: flex;
+            align-items: flex-start;
+            background-color: #f1f5f9;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .checkbox-option:hover, .radio-option:hover {
+            background-color: #e2e8f0;
+        }
+        
+        input[type="checkbox"], input[type="radio"] {
+            margin-right: 10px;
+            margin-top: 4px;
+        }
+        
+        label {
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        textarea, input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-family: inherit;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .contact-info {
+            background-color: #f0f9ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .contact-info h3 {
+            margin-top: 0;
+            color: #2563eb;
+            margin-bottom: 15px;
+        }
+        
+        .field-group {
+            margin-bottom: 15px;
+        }
+        
+        .field-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .actions {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        
+        .completion-message {
+            text-align: center;
+            background-color: #dcfce7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            color: #166534;
+            display: none;
+        }
+        
+        /* Loading indicator */
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Error message */
+        .error-message {
+            color: #dc2626;
+            background-color: #fee2e2;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>AI Consulting Quick Profile</h1>
+        <p class="intro">Please answer these questions so we can understand your business and how iTabs can help you.</p>
+        
+        <form id="quickProfileForm" action="https://formsubmit.co/jgwynne7@gmail.com" method="POST">
+            <!-- FormSubmit configuration -->
+            <input type="hidden" name="_subject" value="New AI Consulting Questionnaire Response">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="">
+            
+            <div class="contact-info">
+                <h3>Your Contact Information</h3>
+                <div class="field-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="field-group">
+                    <label for="businessName">Business Name</label>
+                    <input type="text" id="businessName" name="businessName" required>
+                </div>
+                <div class="field-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="field-group">
+                    <label for="phone">Phone Number (optional)</label>
+                    <input type="text" id="phone" name="phone">
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">1. What AI services do you offer or plan to offer?</div>
+                <div class="options">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="service1" name="services[]" value="AI Strategy Development">
+                        <label for="service1">AI Strategy Development</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="service2" name="services[]" value="Natural Language Processing (chatbots, text analysis)">
+                        <label for="service2">Natural Language Processing (chatbots, text analysis)</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="service3" name="services[]" value="Computer Vision Solutions">
+                        <label for="service3">Computer Vision Solutions</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="service4" name="services[]" value="Predictive Analytics & Forecasting">
+                        <label for="service4">Predictive Analytics & Forecasting</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="service5" name="services[]" value="AI Integration with Existing Systems">
+                        <label for="service5">AI Integration with Existing Systems</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="service6" name="services[]" value="AI Training & Education">
+                        <label for="service6">AI Training & Education</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="serviceOther" name="services[]" value="Other">
+                        <label for="serviceOther">Other (please specify):</label>
+                    </div>
+                    <textarea id="servicesOtherText" name="servicesOtherText" placeholder="Please describe other AI services you offer..." style="display: none;"></textarea>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">2. Which industries do you primarily target?</div>
+                <div class="options">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="industry1" name="industries[]" value="Healthcare & Life Sciences">
+                        <label for="industry1">Healthcare & Life Sciences</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="industry2" name="industries[]" value="Financial Services & Banking">
+                        <label for="industry2">Financial Services & Banking</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="industry3" name="industries[]" value="Retail & E-commerce">
+                        <label for="industry3">Retail & E-commerce</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="industry4" name="industries[]" value="Manufacturing & Supply Chain">
+                        <label for="industry4">Manufacturing & Supply Chain</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="industry5" name="industries[]" value="Technology & Software">
+                        <label for="industry5">Technology & Software</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="industry6" name="industries[]" value="Professional Services">
+                        <label for="industry6">Professional Services</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="industryOther" name="industries[]" value="Other">
+                        <label for="industryOther">Other (please specify):</label>
+                    </div>
+                    <textarea id="industriesOtherText" name="industriesOtherText" placeholder="Please describe other industries you target..." style="display: none;"></textarea>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">3. What size companies do you typically work with?</div>
+                <div class="options">
+                    <div class="radio-option">
+                        <input type="radio" id="size1" name="companySize" value="Small businesses (Under 50 employees)" required>
+                        <label for="size1">Small businesses (Under 50 employees)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="size2" name="companySize" value="Mid-size businesses (50-500 employees)">
+                        <label for="size2">Mid-size businesses (50-500 employees)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="size3" name="companySize" value="Large enterprises (500+ employees)">
+                        <label for="size3">Large enterprises (500+ employees)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="size4" name="companySize" value="Mix of different company sizes">
+                        <label for="size4">Mix of different company sizes</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="size5" name="companySize" value="Not established yet / Not sure">
+                        <label for="size5">Not established yet / Not sure</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">4. How do you currently find and engage potential clients?</div>
+                <div class="options">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="channel1" name="channels[]" value="LinkedIn & Social Media">
+                        <label for="channel1">LinkedIn & Social Media</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="channel2" name="channels[]" value="Company Website">
+                        <label for="channel2">Company Website</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="channel3" name="channels[]" value="Referrals & Word of Mouth">
+                        <label for="channel3">Referrals & Word of Mouth</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="channel4" name="channels[]" value="Industry Events & Conferences">
+                        <label for="channel4">Industry Events & Conferences</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="channel5" name="channels[]" value="Content Marketing & Thought Leadership">
+                        <label for="channel5">Content Marketing & Thought Leadership</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="channel6" name="channels[]" value="Not established yet / Just starting">
+                        <label for="channel6">Not established yet / Just starting</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="channelOther" name="channels[]" value="Other">
+                        <label for="channelOther">Other (please specify):</label>
+                    </div>
+                    <textarea id="channelsOtherText" name="channelsOtherText" placeholder="Please describe other client acquisition methods..." style="display: none;"></textarea>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">5. What objections or concerns do you typically hear from potential clients?</div>
+                <div class="options">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="objection1" name="objections[]" value="Cost concerns ('AI implementation sounds expensive')">
+                        <label for="objection1">Cost concerns ("AI implementation sounds expensive")</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="objection2" name="objections[]" value="Data readiness concerns ('Our data isn't good enough')">
+                        <label for="objection2">Data readiness concerns ("Our data isn't good enough")</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="objection3" name="objections[]" value="ROI uncertainty ('How do we measure the return?')">
+                        <label for="objection3">ROI uncertainty ("How do we measure the return?")</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="objection4" name="objections[]" value="Team capability concerns ('We don't have the skills')">
+                        <label for="objection4">Team capability concerns ("We don't have the skills")</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="objection5" name="objections[]" value="Timeline concerns ('This will take too long')">
+                        <label for="objection5">Timeline concerns ("This will take too long")</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="objection6" name="objections[]" value="Not sure yet / Haven't faced many objections">
+                        <label for="objection6">Not sure yet / Haven't faced many objections</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="objectionOther" name="objections[]" value="Other">
+                        <label for="objectionOther">Other (please specify):</label>
+                    </div>
+                    <textarea id="objectionsOtherText" name="objectionsOtherText" placeholder="Please describe other objections you face..." style="display: none;"></textarea>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">6. Which best describes the current stage of your AI consulting business?</div>
+                <div class="options">
+                    <div class="radio-option">
+                        <input type="radio" id="stage1" name="businessStage" value="Planning phase (pre-launch)" required>
+                        <label for="stage1">Planning phase (pre-launch)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="stage2" name="businessStage" value="Early stage (launched but seeking first clients)">
+                        <label for="stage2">Early stage (launched but seeking first clients)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="stage3" name="businessStage" value="Growth stage (established with some clients, looking to expand)">
+                        <label for="stage3">Growth stage (established with some clients, looking to expand)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="stage4" name="businessStage" value="Established business (stable client base and consistent revenue)">
+                        <label for="stage4">Established business (stable client base and consistent revenue)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">7. What content would you most want to present with iTabs?</div>
+                <div class="options">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="content1" name="content[]" value="AI service descriptions & details">
+                        <label for="content1">AI service descriptions & details</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="content2" name="content[]" value="Case studies & success stories">
+                        <label for="content2">Case studies & success stories</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="content3" name="content[]" value="AI technology explainers & education">
+                        <label for="content3">AI technology explainers & education</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="content4" name="content[]" value="Team expertise & credentials">
+                        <label for="content4">Team expertise & credentials</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="content5" name="content[]" value="ROI calculators & benefit demonstrations">
+                        <label for="content5">ROI calculators & benefit demonstrations</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="content6" name="content[]" value="Implementation process & methodology">
+                        <label for="content6">Implementation process & methodology</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="contentOther" name="content[]" value="Other">
+                        <label for="contentOther">Other (please specify):</label>
+                    </div>
+                    <textarea id="contentOtherText" name="contentOtherText" placeholder="Please describe other content you'd like to present..." style="display: none;"></textarea>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">8. Where would you like to implement iTabs?</div>
+                <div class="options">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="place1" name="placement[]" value="Company website">
+                        <label for="place1">Company website</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="place2" name="placement[]" value="LinkedIn posts/profile">
+                        <label for="place2">LinkedIn posts/profile</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="place3" name="placement[]" value="Email marketing campaigns">
+                        <label for="place3">Email marketing campaigns</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="place4" name="placement[]" value="Client proposals & presentations">
+                        <label for="place4">Client proposals & presentations</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="place5" name="placement[]" value="Sales collateral & documentation">
+                        <label for="place5">Sales collateral & documentation</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="placeOther" name="placement[]" value="Other">
+                        <label for="placeOther">Other (please specify):</label>
+                    </div>
+                    <textarea id="placementOtherText" name="placementOtherText" placeholder="Please describe other places you'd like to implement iTabs..." style="display: none;"></textarea>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <button type="submit">Submit Questionnaire</button>
+            </div>
+            
+            <div class="loading" id="loadingIndicator">
+                <div class="loading-spinner"></div>
+                <p>Submitting your responses...</p>
+            </div>
+            
+            <div class="error-message" id="errorMessage">
+                <p>There was an error submitting the form. Please try again or contact us directly.</p>
+            </div>
+            
+            <div class="completion-message" id="completionMessage">
+                <h3>Thank you for your responses!</h3>
+                <p>We'll use this information to create a custom iTabs implementation plan for your AI consulting business.</p>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Show/hide "Other" text areas
+        document.getElementById('serviceOther').addEventListener('change', function() {
+            document.getElementById('servicesOtherText').style.display = this.checked ? 'block' : 'none';
+        });
+        
+        document.getElementById('industryOther').addEventListener('change', function() {
+            document.getElementById('industriesOtherText').style.display = this.checked ? 'block' : 'none';
+        });
+        
+        document.getElementById('channelOther').addEventListener('change', function() {
+            document.getElementById('channelsOtherText').style.display = this.checked ? 'block' : 'none';
+        });
+        
+        document.getElementById('objectionOther').addEventListener('change', function() {
+            document.getElementById('objectionsOtherText').style.display = this.checked ? 'block' : 'none';
+        });
+        
+        document.getElementById('contentOther').addEventListener('change', function() {
+            document.getElementById('contentOtherText').style.display = this.checked ? 'block' : 'none';
+        });
+        
+        document.getElementById('placeOther').addEventListener('change', function() {
+            document.getElementById('placementOtherText').style.display = this.checked ? 'block' : 'none';
+        });
+        
+        // Form submission
+        document.getElementById('quickProfileForm').addEventListener('submit', function(e) {
+            // Show loading indicator
+            document.getElementById('loadingIndicator').style.display = 'block';
+            
+            // Hide any previous error messages
+            document.getElementById('errorMessage').style.display = 'none';
+            
+            // The form will be submitted to FormSubmit service which will email the results
+            // No need to prevent default - let the form submit normally
+        });
+    </script>
+</body>
+</html>
+<br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>iTabs Demo with Reaction</title>
     <style>
