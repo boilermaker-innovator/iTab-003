@@ -60,6 +60,991 @@
             font-weight: 700;
             color: white;
             text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-menu a:hover {
+            color: var(--accent);
+        }
+        
+        .cta-button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .cta-button:hover {
+            background-color: #0ea371;
+            transform: translateY(-2px);
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            background: linear-gradient(135deg, var(--dark) 0%, #1e3a8a 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .hero-pattern {
+            position: absolute;
+            right: -150px;
+            bottom: -150px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0) 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        /* iTab Styles */
+        .i-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            margin-left: 10px;
+            font-style: italic;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            border: none;
+            transition: var(--transition);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .i-button:hover {
+            transform: scale(1.1);
+            background-color: #0ea371;
+        }
+        
+        .itab-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .itab-popup {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            width: 400px;
+            max-width: 90vw;
+            padding: 20px;
+            color: var(--dark);
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+        }
+        
+        .itab-popup.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .process-step .itab-popup {
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            width: 300px;
+        }
+        
+        .process-step .itab-popup.active {
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .itab-popup h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .itab-popup p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .itab-popup .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-teaser {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            padding: 20px;
+        }
+        
+        .service-teaser:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-teaser h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+        }
+        
+        .service-teaser p {
+            color: var(--gray);
+        }
+        
+        /* Industry Section */
+        .industries {
+            padding: 80px 0;
+            background-color: #f1f5f9;
+        }
+        
+        .tabs-container {
+            margin-top: 40px;
+        }
+        
+        .tabs-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tab-button {
+            padding: 10px 20px;
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .tab-button:hover {
+            background-color: #f8fafc;
+        }
+        
+        .tab-button.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .tab-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .industry-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .industry-feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .industry-feature-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #e0f2fe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .industry-feature-icon svg {
+            color: var(--primary);
+        }
+        
+        .industry-stats {
+            background-color: #f8fafc;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 80px 0;
+        }
+        
+        .process-steps {
+            margin-top: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .process-step {
+            flex: 1 1 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            z-index: 2;
+        }
+        
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            right: -20px;
+            width: calc(100% - 50px);
+            height: 2px;
+            background-color: #e2e8f0;
+            z-index: 1;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-primary {
+            background-color: white;
+            color: var(--primary);
+            padding: 12px 30px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-secondary {
+            border: 2px solid white;
+            color: white;
+            padding: 12px 30px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .cta-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 30px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero-grid, .industry-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-image {
+                order: -1;
+            }
+            
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: var(--dark);
+                padding: 20px;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .process-step:not(:last-child)::after {
+                display: none;
+            }
+            
+            .itab-popup {
+                width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="#" class="logo">Desmond<span>AI</span></a>
+                <ul class="nav-menu">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#industries">Industries</a></li>
+                    <li><a href="#process">Our Process</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-toggle">☰</button>
+                <button class="cta-button">Get Started</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>AI Solutions for Forward-Thinking Businesses</h1>
+                    <p>
+                        We help organizations harness the power of artificial intelligence to solve complex problems, drive innovation, and create competitive advantage.
+                        <span class="itab-container">
+                            <button class="i-button" aria-label="More about Why Clients Choose DesmondAI">i</button>
+                            <div class="itab-popup">
+                                <button class="close-btn">×</button>
+                                <h3>Why Clients Choose DesmondAI</h3>
+                                <p>We bridge the gap between cutting-edge AI technology and practical business implementation. Our approach combines technical expertise with business acumen to ensure AI solutions that deliver real results.</p>
+                                <p>Unlike general consultancies, we focus exclusively on AI implementation, with a proven track record of reducing implementation time by 40% and increasing ROI by 35% compared to industry averages.</p>
+                            </div>
+                        </span>
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="cta-button">Schedule a Consultation</button>
+                        <button class="cta-button" style="background: none; border: 2px solid white;">
+                            See Our Work
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="/api/placeholder/600/400" alt="AI Solutions Visualization" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="hero-pattern"></div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Comprehensive AI solutions tailored to your specific business challenges</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-teaser">
+                    <h3>AI Strategy Development</h3>
+                    <p>
+                        Develop a roadmap for AI adoption that aligns with your business goals.
+                        <span class="itab-container">
+                            <button class="i-button" aria-label="More about AI Strategy Development">i</button>
+                            <div class="itab-popup">
+                                <button class="close-btn">×</button>
+                                <h3>AI Strategy Details</h3>
+                                <p><strong>Our Approach:</strong></p>
+                                <ul>
+                                    <li>Comprehensive assessment of AI readiness</li>
+                                    <li>Identification of high-impact use cases</li>
+                                    <li>Data strategy development</li>
+                                    <li>Technology selection guidance</li>
+                                    <li>Implementation roadmap creation</li>
+                                </ul>
+                                <p><strong>Case Study:</strong> We helped a mid-sized manufacturing company prioritize AI initiatives, resulting in a 22% reduction in operational costs and 15% increase in production efficiency within 9 months.</p>
+                            </div>
+                        </span>
+                    </p>
+                </div>
+                <div class="service-teaser">
+                    <h3>Natural Language Processing</h3>
+                    <p>
+                        Transform how your business handles text and voice data.
+                        <span class="itab-container">
+                            <button class="i-button" aria-label="More about NLP Solutions">i</button>
+                            <div class="itab-popup">
+                                <button class="close-btn">×</button>
+                                <h3>NLP Details</h3>
+                                <p><strong>Our Solutions:</strong></p>
+                                <ul>
+                                    <li>Conversational AI & intelligent chatbots</li>
+                                    <li>Sentiment analysis & voice of customer</li>
+                                    <li>Automated document classification</li>
+                                </ul>
+                                <p><strong>Success Story:</strong> We implemented an NLP solution for a financial services firm that automated document review, reducing processing time by 65% and increasing accuracy to 94%.</p>
+                            </div>
+                        </span>
+                    </p>
+                </div>
+                <div class="service-teaser">
+                    <h3>AI Implementation</h3>
+                    <p>
+                        End-to-end AI solution development and deployment.
+                        <span class="itab-container">
+                            <button class="i-button" aria-label="More about AI Implementation">i</button>
+                            <div class="itab-popup">
+                                <button class="close-btn">×</button>
+                                <h3>Implementation Details</h3>
+                                <p><strong>Services:</strong></p>
+                                <ul>
+                                    <li>AI model development & optimization</li>
+                                    <li>System integration with existing infrastructure</li>
+                                    <li>Scalable deployment architecture</li>
+                                </ul>
+                                <p><strong>Client Impact:</strong> Our team helped a healthcare provider deploy a predictive analytics system that reduced patient readmissions by 18% and generated $2.4M in annual savings.</p>
+                            </div>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industry Solutions Section -->
+    <section class="industries" id="industries">
+        <div class="container">
+            <div class="section-header">
+                <h2>Industry Solutions</h2>
+                <p>AI applications tailored to your industry's specific challenges</p>
+            </div>
+            <div class="tabs-container">
+                <div class="tabs-nav">
+                    <button class="tab-button active" data-tab="healthcare">Healthcare</button>
+                    <button class="tab-button" data-tab="finance">Financial Services</button>
+                </div>
+                <div class="tab-content active" id="healthcare-tab">
+                    <h3>AI in Healthcare</h3>
+                    <p>Our healthcare AI solutions help providers deliver better patient outcomes.</p>
+                    <div class="industry-grid">
+                        <div>
+                            <div class="industry-feature">
+                                <div class="industry-feature-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm0 5a1.5 1.5 0 0 1 1.5 1.5A1.5 1.5 0 0 1 8 8 1.5 1.5 0 0 1 6.5 6.5 1.5 1.5 0 0 1 8 5z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4>Predictive Patient Monitoring</h4>
+                                    <p>
+                                        Identify at-risk patients early.
+                                        <span class="itab-container">
+                                            <button class="i-button" aria-label="More about Predictive Monitoring">i</button>
+                                            <div class="itab-popup">
+                                                <button class="close-btn">×</button>
+                                                <h3>Predictive Monitoring</h3>
+                                                <p>AI-powered early warning systems that reduce emergency interventions by up to 30% through real-time patient data analysis.</p>
+                                            </div>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="industry-feature">
+                                <div class="industry-feature-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4>Administrative Automation</h4>
+                                    <p>
+                                        Streamline paperwork with NLP.
+                                        <span class="itab-container">
+                                            <button class="i-button" aria-label="More about Administrative Automation">i</button>
+                                            <div class="itab-popup">
+                                                <button class="close-btn">×</button>
+                                                <h3>Administrative Automation</h3>
+                                                <p>Automates coding and documentation, freeing up to 25% of clinical staff time for patient care.</p>
+                                            </div>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="industry-stats">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number">30%</div>
+                                <div class="stat-label">Reduction in Readmissions</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">$2.4M</div>
+                                <div class="stat-label">Annual Savings</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="finance-tab">
+                    <h3>AI in Financial Services</h3>
+                    <p>Transform financial operations with AI solutions.</p>
+                    <div class="industry-grid">
+                        <div>
+                            <div class="industry-feature">
+                                <div class="industry-feature-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.708 2.825L15 11.023V5.383zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383v5.722z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4>Fraud Detection</h4>
+                                    <p>
+                                        Identify fraudulent transactions in real-time.
+                                        <span class="itab-container">
+                                            <button class="i-button" aria-label="More about Fraud Detection">i</button>
+                                            <div class="itab-popup">
+                                                <button class="close-btn">×</button>
+                                                <h3>Fraud Detection</h3>
+                                                <p>AI-driven anomaly detection reduces fraud losses by up to 35% with real-time monitoring.</p>
+                                            </div>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Process</h2>
+                <p>A proven methodology to deliver successful AI implementations</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Discovery</h3>
+                    <p>
+                        We analyze your business challenges.
+                        <span class="itab-container">
+                            <button class="i-button" aria-label="More about Discovery Phase">i</button>
+                            <div class="itab-popup">
+                                <button class="close-btn">×</button>
+                                <h3>Discovery Phase</h3>
+                                <p><strong>Duration:</strong> 2-4 weeks</p>
+                                <p><strong>Key Activities:</strong></p>
+                                <ul>
+                                    <li>Stakeholder interviews</li>
+                                    <li>Process analysis</li>
+                                    <li>Data assessment</li>
+                                </ul>
+                            </div>
+                        </span>
+                    </p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Strategy</h3>
+                    <p>
+                        We develop a tailored AI roadmap.
+                        <span class="itab-container">
+                            <button class="i-button" aria-label="More about Strategy Phase">i</button>
+                            <div class="itab-popup">
+                                <button class="close-btn">×</button>
+                                <h3>Strategy Phase</h3>
+                                <p><strong>Duration:</strong> 3-6 weeks</p>
+                                <p><strong>Key Activities:</strong></p>
+                                <ul>
+                                    <li>Technology selection</li>
+                                    <li>Solution architecture</li>
+                                    <li>Data strategy development</li>
+                                </ul>
+                            </div>
+                        </span>
+                    </p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Implementation</h3>
+                    <p>
+                        We build and deploy AI solutions.
+                        <span class="itab-container">
+                            <button class="i-button" aria-label="More about Implementation Phase">i</button>
+                            <div class="itab-popup">
+                                <button class="close-btn">×</button>
+                                <h3>Implementation Phase</h3>
+                                <p><strong>Duration:</strong> 1-6 months</p>
+                                <p><strong>Key Activities:</strong></p>
+                                <ul>
+                                    <li>Data preparation</li>
+                                    <li>Model development</li>
+                                    <li>System integration</li>
+                                </ul>
+                            </div>
+                        </span>
+                    </p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Optimization</h3>
+                    <p>
+                        We monitor and improve performance.
+                        <span class="itab-container">
+                            <button class="i-button" aria-label="More about Optimization Phase">i</button>
+                            <div class="itab-popup">
+                                <button class="close-btn">×</button>
+                                <h3>Optimization Phase</h3>
+                                <p><strong>Duration:</strong> Ongoing</p>
+                                <p><strong>Key Activities:</strong></p>
+                                <ul>
+                                    <li>Performance monitoring</li>
+                                    <li>Model refinement</li>
+                                    <li>ROI measurement</li>
+                                </ul>
+                            </div>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Business with AI?</h2>
+            <p>Schedule a no-obligation consultation with our team.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="cta-primary">Schedule Consultation</a>
+                <a href="#case-studies" class="cta-secondary">View Case Studies</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">AI Strategy</a></li>
+                        <li><a href="#">NLP Solutions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li>info@desmondai.com</li>
+                        <li>+1 (555) 123-4567</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 DesmondAI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            mobileToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+            // All iTabs
+            document.querySelectorAll('.itab-container .i-button').forEach(button => {
+                const popup = button.nextElementSibling;
+                const closeBtn = popup.querySelector('.close-btn');
+                
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    popup.classList.toggle('active');
+                });
+                
+                closeBtn.addEventListener('click', () => popup.classList.remove('active'));
+                
+                document.addEventListener('click', (e) => {
+                    if (!popup.contains(e.target) && e.target !== button) {
+                        popup.classList.remove('active');
+                    }
+                });
+            });
+
+            // Industry Tabs
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById(this.getAttribute('data-tab') + '-tab').classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desmond AI - Intelligent Solutions for Forward-Thinking Businesses</title>
+    <style>
+        /* General Styles */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --accent: #10b981;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--dark);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
             display: flex;
             align-items: center;
         }
