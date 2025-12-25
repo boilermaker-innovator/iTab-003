@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Lady of Kenya Interview - Good Life TV</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <title>Good Life TV Interviews - iTabs Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@600;700&family=Open+Sans:wght@400;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,25 +13,48 @@
         }
         
         body {
-            font-family: 'Source Sans Pro', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(145deg, #f5f5f5 0%, #e8e8e8 50%, #f0f0f0 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            padding: 30px 20px;
         }
         
-        .itabs-container {
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5em;
+            color: #1a1a2e;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            color: #666;
+            font-size: 1em;
+        }
+        
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        
+        /* ============ SHARED CARD STYLES ============ */
+        .itabs-card {
             width: 100%;
-            max-width: 420px;
             background: #ffffff;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
         
-        /* Slideshow */
         .slideshow-wrapper {
             position: relative;
             width: 100%;
@@ -60,7 +83,6 @@
             object-fit: cover;
         }
         
-        /* Navigation dots */
         .slide-dots {
             position: absolute;
             bottom: 15px;
@@ -81,520 +103,37 @@
         }
         
         .dot.active {
-            background: #fff;
+            background: #dc2626;
             transform: scale(1.2);
         }
         
-        /* The "i" button */
         .itabs-button {
             position: absolute;
             bottom: 50px;
             right: 20px;
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #c9a227 0%, #d4af37 50%, #f0c75e 100%);
-            color: #1a1a2e;
+            background: #dc2626;
+            color: #fff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Open Sans', sans-serif;
             font-weight: 700;
-            font-size: 26px;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(201,162,39,0.5);
-            border: 3px solid rgba(255,255,255,0.9);
-            z-index: 20;
-            transition: all 0.3s ease;
-        }
-        
-        .itabs-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(201,162,39,0.7);
-        }
-        
-        /* Content area below slideshow */
-        .content-area {
-            padding: 25px;
-            text-align: center;
-            background: linear-gradient(180deg, #fff 0%, #f8f6f0 100%);
-        }
-        
-        .content-area h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4em;
-            color: #1a1a2e;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-        
-        .content-area .subtitle {
-            color: #c9a227;
-            font-size: 0.95em;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-        
-        .content-area p {
-            color: #555;
-            font-size: 0.95em;
-            line-height: 1.5;
-        }
-        
-        /* Watch button */
-        .watch-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 14px 35px;
-            background: linear-gradient(135deg, #c9a227 0%, #d4af37 100%);
-            color: #1a1a2e;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 1em;
-            box-shadow: 0 4px 15px rgba(201,162,39,0.4);
-            transition: all 0.3s ease;
-        }
-        
-        .watch-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(201,162,39,0.5);
-        }
-        
-        /* Popup overlay */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .popup-content {
-            background: #fff;
-            border-radius: 20px;
-            width: 100%;
-            max-width: 400px;
-            max-height: 85vh;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
-        }
-        
-        .popup-header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 25px 20px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .popup-header h2 {
-            font-family: 'Playfair Display', serif;
-            color: #fff;
-            font-size: 1.4em;
-            margin-bottom: 5px;
-        }
-        
-        .popup-header .subtitle {
-            color: #c9a227;
-            font-size: 0.9em;
-            font-weight: 600;
-        }
-        
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 35px;
-            height: 35px;
-            background: rgba(255,255,255,0.15);
-            border: none;
-            border-radius: 50%;
-            color: #fff;
             font-size: 24px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
-        }
-        
-        .close-btn:hover {
-            background: rgba(255,255,255,0.25);
-        }
-        
-        .popup-body {
-            padding: 0;
-            max-height: 50vh;
-            overflow-y: auto;
-        }
-        
-        .info-section {
-            padding: 20px 25px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .info-section:last-child {
-            border-bottom: none;
-        }
-        
-        .info-section h4 {
-            font-family: 'Playfair Display', serif;
-            color: #1a1a2e;
-            font-size: 1.1em;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .info-section h4 span {
-            font-size: 1.2em;
-        }
-        
-        .info-section p {
-            color: #555;
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-        
-        .popup-footer {
-            padding: 20px;
-            background: #f8f6f0;
-        }
-        
-        .popup-footer a {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #c9a227 0%, #d4af37 100%);
-            color: #1a1a2e;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 1.05em;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(201,162,39,0.4);
-            transition: all 0.3s ease;
-        }
-        
-        .popup-footer a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(201,162,39,0.5);
-        }
-        
-        /* iTabs branding */
-        .itabs-credit {
-            text-align: center;
-            padding: 15px;
-            background: #f8f6f0;
-            border-top: 1px solid #eee;
-            font-size: 0.85em;
-            color: #888;
-        }
-        
-        .itabs-credit a {
-            color: #c9a227;
-            text-decoration: none;
-            font-weight: 600;
-        }
-    </style>
-</head>
-<body>
-
-<div class="itabs-container">
-    <!-- Slideshow -->
-    <div class="slideshow-wrapper">
-        <div class="slide active">
-            <img src="https://images.squarespace-cdn.com/content/v1/5e5423b9a37dc00ee8638a87/1692826973798-01WYUYL4YDVIFLTHD5NT/Thumbnails+GLTV+%2887%29.png" alt="First Lady of Kenya Mama Rachel Ruto">
-        </div>
-        <div class="slide">
-            <img src="https://images.squarespace-cdn.com/content/v1/5e5423b9a37dc00ee8638a87/1583973953225-5UK8EZRY4BOE6JW0KU04/GL_LogoVariation.png" alt="Good Life TV Logo">
-        </div>
-        <div class="slide">
-            <img src="https://images.unsplash.com/photo-1589519160732-57fc498494f8?w=800" alt="Kenya landscape">
-        </div>
-        
-        <!-- Navigation dots -->
-        <div class="slide-dots">
-            <div class="dot active" onclick="goToSlide(0)"></div>
-            <div class="dot" onclick="goToSlide(1)"></div>
-            <div class="dot" onclick="goToSlide(2)"></div>
-        </div>
-        
-        <!-- The "i" button -->
-        <div class="itabs-button" onclick="openPopup()">i</div>
-    </div>
-    
-    <!-- Content below slideshow -->
-    <div class="content-area">
-        <h3>First Lady of Kenya</h3>
-        <div class="subtitle">Mama Rachel Ruto</div>
-        <p>Tap the golden "i" for the full story behind this extraordinary interview</p>
-        <a href="https://youtu.be/OP22BzU6bag" class="watch-button" target="_blank">▶ Watch Interview</a>
-    </div>
-    
-    <!-- iTabs credit -->
-    <div class="itabs-credit">
-        Made with ❤️ by <a href="https://itabs.ai" target="_blank">iTabs</a>
-    </div>
-</div>
-
-<!-- Popup -->
-<div class="popup-overlay" id="popup" onclick="closePopup(event)">
-    <div class="popup-content" onclick="event.stopPropagation()">
-        <div class="popup-header">
-            <button class="close-btn" onclick="closePopupBtn()">&times;</button>
-            <h2>First Lady of Kenya Interview</h2>
-            <div class="subtitle">Mama Rachel Ruto × Dean Wilson</div>
-        </div>
-        
-        <div class="popup-body">
-            <div class="info-section">
-                <h4><span>🌍</span> Who is Mama Rachel Ruto?</h4>
-                <p>The First Lady of Kenya since 2022, Mama Rachel Ruto is a powerful advocate for faith, family, and community development. She brings decades of experience in grassroots empowerment and women's initiatives across East Africa.</p>
-            </div>
-            
-            <div class="info-section">
-                <h4><span>🎬</span> Why This Interview Matters</h4>
-                <p>Dean Wilson was personally invited to interview the First Lady at a conference in Southern California. This rare, intimate conversation reveals her deep faith in God and her message: "With God, all things are possible."</p>
-            </div>
-            
-            <div class="info-section">
-                <h4><span>✨</span> What You'll Discover</h4>
-                <p>An inspiring conversation about faith, leadership, and hope. Mama Rachel shares how her spiritual foundation shapes her role as First Lady and her vision for Kenya's future. A truly special moment captured by Good Life TV.</p>
-            </div>
-            
-            <div class="info-section">
-                <h4><span>📺</span> About Good Life TV</h4>
-                <p>Good Life TV with Dean Wilson celebrates the good things in life — friendship, love, hope, and inspiration. With 30+ years of broadcast experience, Dean brings you interviews with extraordinary people making a positive impact.</p>
-            </div>
-        </div>
-        
-        <div class="popup-footer">
-            <a href="https://youtu.be/OP22BzU6bag" target="_blank">Watch the Full Interview →</a>
-        </div>
-    </div>
-</div>
-
-<script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let slideInterval;
-    
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.remove('active');
-            dots[i].classList.remove('active');
-        });
-        slides[index].classList.add('active');
-        dots[index].classList.add('active');
-        currentSlide = index;
-    }
-    
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    }
-    
-    function goToSlide(index) {
-        clearInterval(slideInterval);
-        showSlide(index);
-        startSlideshow();
-    }
-    
-    function startSlideshow() {
-        slideInterval = setInterval(nextSlide, 4000);
-    }
-    
-    // Touch/swipe support
-    let touchStartX = 0;
-    const wrapper = document.querySelector('.slideshow-wrapper');
-    
-    wrapper.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-    });
-    
-    wrapper.addEventListener('touchend', (e) => {
-        const touchEndX = e.changedTouches[0].clientX;
-        const diff = touchStartX - touchEndX;
-        
-        if (Math.abs(diff) > 50) {
-            clearInterval(slideInterval);
-            if (diff > 0) {
-                currentSlide = (currentSlide + 1) % slides.length;
-            } else {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            }
-            showSlide(currentSlide);
-            startSlideshow();
-        }
-    });
-    
-    // Popup functions
-    function openPopup() {
-        document.getElementById('popup').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closePopup(e) {
-        if (e.target === document.getElementById('popup')) {
-            document.getElementById('popup').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    }
-    
-    function closePopupBtn() {
-        document.getElementById('popup').style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-    
-    // Start slideshow
-    startSlideshow();
-</script>
-
-</body>
-</html>
-<cr>
-    <cr>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dean Cain Interview - Good Life TV</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background: linear-gradient(145deg, #f5f5f5 0%, #e8e8e8 50%, #f0f0f0 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .itabs-container {
-            width: 100%;
-            max-width: 420px;
-            background: #ffffff;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1), 0 25px 80px rgba(0,0,0,0.08);
-            border: 1px solid rgba(0,0,0,0.08);
-        }
-        
-        /* Slideshow */
-        .slideshow-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/10;
-            overflow: hidden;
-            background: #000;
-        }
-        
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-        }
-        
-        .slide.active {
-            opacity: 1;
-        }
-        
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Subtle gradient overlay */
-        .slide::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 30%;
-            background: linear-gradient(to top, rgba(255,255,255,0.8) 0%, transparent 100%);
-            pointer-events: none;
-        }
-        
-        /* Navigation dots */
-        .slide-dots {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-        
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .dot.active {
-            background: #dc2626;
-            box-shadow: 0 0 10px rgba(220, 38, 38, 0.8);
-            transform: scale(1.2);
-        }
-        
-        /* The "i" button - Superman style */
-        .itabs-button {
-            position: absolute;
-            bottom: 50px;
-            right: 20px;
-            width: 52px;
-            height: 52px;
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%);
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 700;
-            font-size: 26px;
-            cursor: pointer;
-            box-shadow: 0 4px 25px rgba(220, 38, 38, 0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
             border: 3px solid rgba(255,255,255,0.9);
             z-index: 20;
             transition: all 0.3s ease;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
         .itabs-button:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 35px rgba(220, 38, 38, 0.7), inset 0 1px 0 rgba(255,255,255,0.2);
+            box-shadow: 0 6px 30px rgba(220, 38, 38, 0.6);
         }
         
-        /* Content area below slideshow */
         .content-area {
             padding: 25px;
             text-align: center;
@@ -603,11 +142,11 @@
         
         .guest-label {
             display: inline-block;
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            background: #dc2626;
             color: #fff;
             padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.75em;
+            font-size: 0.7em;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -616,48 +155,62 @@
         
         .content-area h3 {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 2em;
+            font-size: 1.8em;
             color: #1a1a2e;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             letter-spacing: 2px;
         }
         
         .content-area .subtitle {
             color: #dc2626;
-            font-size: 0.95em;
+            font-size: 0.9em;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
         .content-area p {
-            color: #555;
+            color: #666;
             font-size: 0.9em;
             line-height: 1.5;
         }
         
-        /* Watch button */
         .watch-button {
             display: inline-block;
-            margin-top: 20px;
-            padding: 14px 35px;
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            margin-top: 18px;
+            padding: 12px 30px;
+            background: #dc2626;
             color: #fff;
             text-decoration: none;
             border-radius: 30px;
             font-weight: 700;
-            font-size: 0.95em;
+            font-size: 0.9em;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
             transition: all 0.3s ease;
         }
         
         .watch-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(220, 38, 38, 0.6);
+            box-shadow: 0 6px 25px rgba(220, 38, 38, 0.5);
         }
         
-        /* Popup overlay */
+        .itabs-credit {
+            text-align: center;
+            padding: 12px;
+            background: #f8f8f8;
+            border-top: 1px solid #eee;
+            font-size: 0.8em;
+            color: #888;
+        }
+        
+        .itabs-credit a {
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* ============ POPUP STYLES ============ */
         .popup-overlay {
             display: none;
             position: fixed;
@@ -684,7 +237,7 @@
         }
         
         .popup-header {
-            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            background: #dc2626;
             padding: 25px 20px;
             text-align: center;
             position: relative;
@@ -693,14 +246,14 @@
         .popup-header h2 {
             font-family: 'Bebas Neue', sans-serif;
             color: #fff;
-            font-size: 1.6em;
+            font-size: 1.5em;
             letter-spacing: 2px;
             margin-bottom: 5px;
         }
         
-        .popup-header .subtitle {
+        .popup-header .popup-subtitle {
             color: rgba(255,255,255,0.9);
-            font-size: 0.9em;
+            font-size: 0.85em;
             font-weight: 600;
         }
         
@@ -710,7 +263,7 @@
             right: 15px;
             width: 35px;
             height: 35px;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.2);
             border: none;
             border-radius: 50%;
             color: #fff;
@@ -723,7 +276,7 @@
         }
         
         .close-btn:hover {
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.4);
         }
         
         .popup-body {
@@ -734,7 +287,7 @@
         }
         
         .info-section {
-            padding: 20px 25px;
+            padding: 18px 22px;
             border-bottom: 1px solid #eee;
         }
         
@@ -745,151 +298,185 @@
         .info-section h4 {
             font-family: 'Bebas Neue', sans-serif;
             color: #1a1a2e;
-            font-size: 1.15em;
+            font-size: 1.1em;
             letter-spacing: 1px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .info-section h4 span {
-            font-size: 1.2em;
-        }
-        
         .info-section p {
             color: #555;
-            font-size: 0.9em;
+            font-size: 0.88em;
             line-height: 1.6;
         }
         
         .popup-footer {
-            padding: 20px;
+            padding: 18px;
             background: #ffffff;
         }
         
         .popup-footer a {
             display: block;
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            padding: 14px;
+            background: #dc2626;
             color: #fff;
             text-decoration: none;
             border-radius: 30px;
             font-weight: 700;
-            font-size: 0.95em;
+            font-size: 0.9em;
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
             transition: all 0.3s ease;
         }
         
         .popup-footer a:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(220, 38, 38, 0.6);
-        }
-        
-        /* iTabs branding */
-        .itabs-credit {
-            text-align: center;
-            padding: 15px;
-            background: #f5f5f5;
-            border-top: 1px solid #eee;
-            font-size: 0.85em;
-            color: #888;
-        }
-        
-        .itabs-credit a {
-            color: #dc2626;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        /* Scrollbar styling */
-        .popup-body::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        .popup-body::-webkit-scrollbar-track {
-            background: #f0f0f0;
-        }
-        
-        .popup-body::-webkit-scrollbar-thumb {
-            background: #dc2626;
-            border-radius: 3px;
+            box-shadow: 0 6px 25px rgba(220, 38, 38, 0.5);
         }
     </style>
 </head>
 <body>
 
-<div class="itabs-container">
-    <!-- Slideshow -->
-    <div class="slideshow-wrapper">
-        <div class="slide active">
-            <img src="https://images.squarespace-cdn.com/content/v1/5e5423b9a37dc00ee8638a87/1651536843557-NS4DC6FDNHLBFG4UNGFY/Dean+Cain-1.jpeg" alt="Dean Cain Interview">
-        </div>
-        <div class="slide">
-            <img src="https://images.squarespace-cdn.com/content/v1/5e5423b9a37dc00ee8638a87/1583973953225-5UK8EZRY4BOE6JW0KU04/GL_LogoVariation.png" alt="Good Life TV Logo">
-        </div>
-        <div class="slide">
-            <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=800" alt="Superman cape">
+<div class="page-header">
+    <h1>Good Life TV Interviews</h1>
+    <p>Tap the red "i" button to learn more about each guest</p>
+</div>
+
+<div class="cards-container">
+    
+    <!-- ============ CARD 1: FIRST LADY OF KENYA ============ -->
+    <div class="itabs-card" id="card1">
+        <div class="slideshow-wrapper">
+            <div class="slide active" data-card="1">
+                <img src="https://images.squarespace-cdn.com/content/v1/5e5423b9a37dc00ee8638a87/1692826973798-01WYUYL4YDVIFLTHD5NT/Thumbnails+GLTV+%2887%29.png" alt="First Lady of Kenya">
+            </div>
+            <div class="slide" data-card="1">
+                <img src="https://images.squarespace-cdn.com/content/v1/5e5423b9a37dc00ee8638a87/1583973953225-5UK8EZRY4BOE6JW0KU04/GL_LogoVariation.png" alt="Good Life TV Logo">
+            </div>
+            
+            <div class="slide-dots">
+                <div class="dot active" onclick="goToSlide(1, 0)"></div>
+                <div class="dot" onclick="goToSlide(1, 1)"></div>
+            </div>
+            
+            <div class="itabs-button" onclick="openPopup('popup1')">i</div>
         </div>
         
-        <!-- Navigation dots -->
-        <div class="slide-dots">
-            <div class="dot active" onclick="goToSlide(0)"></div>
-            <div class="dot" onclick="goToSlide(1)"></div>
-            <div class="dot" onclick="goToSlide(2)"></div>
+        <div class="content-area">
+            <h3>First Lady of Kenya</h3>
+            <div class="subtitle">Mama Rachel Ruto</div>
+            <p>Tap the red "i" for the full story behind this extraordinary interview</p>
+            <a href="https://youtu.be/OP22BzU6bag" class="watch-button" target="_blank">▶ Watch Interview</a>
         </div>
         
-        <!-- The "i" button -->
-        <div class="itabs-button" onclick="openPopup()">i</div>
+        <div class="itabs-credit">
+            Made with ❤️ by <a href="https://itabs.ai" target="_blank">iTabs</a>
+        </div>
     </div>
     
-    <!-- Content below slideshow -->
-    <div class="content-area">
-        <div class="guest-label">Featured Guest</div>
-        <h3>Dean Cain</h3>
-        <div class="subtitle">TV's Superman • Actor • Father</div>
-        <p>Tap the red "i" button to discover what Superman has to say about faith, family, and life beyond the cape</p>
-        <a href="https://www.goodlifetelevision.org/watch-full-episodes/dean-cain" class="watch-button" target="_blank">▶ Watch Interview</a>
+    <!-- ============ CARD 2: DEAN CAIN ============ -->
+    <div class="itabs-card" id="card2">
+        <div class="slideshow-wrapper">
+            <div class="slide active" data-card="2">
+                <img src="https://images.squarespace-cdn.com/content/v1/5e5423b9a37dc00ee8638a87/1651536843557-NS4DC6FDNHLBFG4UNGFY/Dean+Cain-1.jpeg" alt="Dean Cain Interview">
+            </div>
+            <div class="slide" data-card="2">
+                <img src="https://images.squarespace-cdn.com/content/v1/5e5423b9a37dc00ee8638a87/1583973953225-5UK8EZRY4BOE6JW0KU04/GL_LogoVariation.png" alt="Good Life TV Logo">
+            </div>
+            
+            <div class="slide-dots">
+                <div class="dot active" onclick="goToSlide(2, 0)"></div>
+                <div class="dot" onclick="goToSlide(2, 1)"></div>
+            </div>
+            
+            <div class="itabs-button" onclick="openPopup('popup2')">i</div>
+        </div>
+        
+        <div class="content-area">
+            <div class="guest-label">Featured Guest</div>
+            <h3>Dean Cain</h3>
+            <div class="subtitle">TV's Superman • Actor • Father</div>
+            <p>Tap the red "i" to discover what Superman has to say about faith, family, and life beyond the cape</p>
+            <a href="https://www.goodlifetelevision.org/watch-full-episodes/dean-cain" class="watch-button" target="_blank">▶ Watch Interview</a>
+        </div>
+        
+        <div class="itabs-credit">
+            Made with ❤️ by <a href="https://itabs.ai" target="_blank">iTabs</a>
+        </div>
     </div>
     
-    <!-- iTabs credit -->
-    <div class="itabs-credit">
-        Made with ❤️ by <a href="https://itabs.ai" target="_blank">iTabs</a>
+</div>
+
+<!-- ============ POPUP 1: FIRST LADY OF KENYA ============ -->
+<div class="popup-overlay" id="popup1" onclick="closePopup(event, 'popup1')">
+    <div class="popup-content" onclick="event.stopPropagation()">
+        <div class="popup-header">
+            <button class="close-btn" onclick="closePopupBtn('popup1')">&times;</button>
+            <h2>First Lady of Kenya</h2>
+            <div class="popup-subtitle">Mama Rachel Ruto × Dean Wilson</div>
+        </div>
+        
+        <div class="popup-body">
+            <div class="info-section">
+                <h4><span>🌍</span> Who is Mama Rachel Ruto?</h4>
+                <p>The First Lady of Kenya since 2022, Mama Rachel Ruto is a powerful advocate for faith, family, and community development. She brings decades of experience in grassroots empowerment and women's initiatives across East Africa.</p>
+            </div>
+            
+            <div class="info-section">
+                <h4><span>🎬</span> Why This Interview Matters</h4>
+                <p>Dean Wilson was personally invited to interview the First Lady at a conference in Southern California. This rare, intimate conversation reveals her deep faith in God and her message: "With God, all things are possible."</p>
+            </div>
+            
+            <div class="info-section">
+                <h4><span>✨</span> What You'll Discover</h4>
+                <p>An inspiring conversation about faith, leadership, and hope. Mama Rachel shares how her spiritual foundation shapes her role as First Lady and her vision for Kenya's future.</p>
+            </div>
+            
+            <div class="info-section">
+                <h4><span>📺</span> About Good Life TV</h4>
+                <p>Good Life TV with Dean Wilson celebrates the good things in life — friendship, love, hope, and inspiration. With 30+ years of broadcast experience, Dean brings you interviews with extraordinary people.</p>
+            </div>
+        </div>
+        
+        <div class="popup-footer">
+            <a href="https://youtu.be/OP22BzU6bag" target="_blank">Watch the Full Interview →</a>
+        </div>
     </div>
 </div>
 
-<!-- Popup -->
-<div class="popup-overlay" id="popup" onclick="closePopup(event)">
+<!-- ============ POPUP 2: DEAN CAIN ============ -->
+<div class="popup-overlay" id="popup2" onclick="closePopup(event, 'popup2')">
     <div class="popup-content" onclick="event.stopPropagation()">
         <div class="popup-header">
-            <button class="close-btn" onclick="closePopupBtn()">&times;</button>
+            <button class="close-btn" onclick="closePopupBtn('popup2')">&times;</button>
             <h2>Dean Cain Interview</h2>
-            <div class="subtitle">Good Life TV with Dean Wilson</div>
+            <div class="popup-subtitle">Good Life TV with Dean Wilson</div>
         </div>
         
         <div class="popup-body">
             <div class="info-section">
                 <h4><span>🦸</span> Who is Dean Cain?</h4>
-                <p>Best known as Superman in "Lois & Clark: The New Adventures of Superman" (1993-1997), Dean Cain is a Princeton graduate, former NFL player (Buffalo Bills), and has starred in over 200 films and TV shows. He's one of the most iconic actors to wear the cape.</p>
+                <p>Best known as Superman in "Lois & Clark: The New Adventures of Superman" (1993-1997), Dean Cain is a Princeton graduate, former NFL player (Buffalo Bills), and has starred in over 200 films and TV shows.</p>
             </div>
             
             <div class="info-section">
                 <h4><span>🏈</span> Before Superman</h4>
-                <p>Before Hollywood, Dean was a standout athlete. He played football at Princeton University and was signed by the Buffalo Bills. A knee injury ended his NFL dreams, but opened the door to his acting career — proving sometimes setbacks become setups.</p>
+                <p>Before Hollywood, Dean was a standout athlete. He played football at Princeton University and was signed by the Buffalo Bills. A knee injury ended his NFL dreams, but opened the door to his acting career.</p>
             </div>
             
             <div class="info-section">
                 <h4><span>👨‍👧</span> Faith & Fatherhood</h4>
-                <p>In this candid interview with Dean Wilson, Cain opens up about what matters most: being a father, staying grounded despite Hollywood fame, and how his strong family kept him humble. "When I come home, my mom says 'do your dishes' — you're just a regular person."</p>
+                <p>In this candid interview, Cain opens up about what matters most: being a father, staying grounded despite Hollywood fame, and how his strong family kept him humble.</p>
             </div>
             
             <div class="info-section">
                 <h4><span>💬</span> What You'll Learn</h4>
-                <p>Dean shares surprising insights about playing Superman, life lessons from sports, navigating Hollywood as a person of faith, and why fatherhood has been the greatest role of his life. You may be surprised what Superman has to say.</p>
+                <p>Dean shares surprising insights about playing Superman, life lessons from sports, navigating Hollywood as a person of faith, and why fatherhood has been the greatest role of his life.</p>
             </div>
         </div>
         
@@ -900,85 +487,74 @@
 </div>
 
 <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let slideInterval;
+    // Slideshow state for each card
+    const cardState = {
+        1: { currentSlide: 0, interval: null },
+        2: { currentSlide: 0, interval: null }
+    };
     
-    function showSlide(index) {
+    function getSlides(cardNum) {
+        return document.querySelectorAll(`[data-card="${cardNum}"]`);
+    }
+    
+    function getDots(cardNum) {
+        return document.querySelectorAll(`#card${cardNum} .dot`);
+    }
+    
+    function showSlide(cardNum, index) {
+        const slides = getSlides(cardNum);
+        const dots = getDots(cardNum);
+        
         slides.forEach((slide, i) => {
             slide.classList.remove('active');
-            dots[i].classList.remove('active');
         });
+        dots.forEach((dot, i) => {
+            dot.classList.remove('active');
+        });
+        
         slides[index].classList.add('active');
         dots[index].classList.add('active');
-        currentSlide = index;
+        cardState[cardNum].currentSlide = index;
     }
     
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
+    function nextSlide(cardNum) {
+        const slides = getSlides(cardNum);
+        const next = (cardState[cardNum].currentSlide + 1) % slides.length;
+        showSlide(cardNum, next);
     }
     
-    function goToSlide(index) {
-        clearInterval(slideInterval);
-        showSlide(index);
-        startSlideshow();
+    function goToSlide(cardNum, index) {
+        clearInterval(cardState[cardNum].interval);
+        showSlide(cardNum, index);
+        startSlideshow(cardNum);
     }
     
-    function startSlideshow() {
-        slideInterval = setInterval(nextSlide, 4000);
+    function startSlideshow(cardNum) {
+        cardState[cardNum].interval = setInterval(() => nextSlide(cardNum), 4000);
     }
-    
-    // Touch/swipe support
-    let touchStartX = 0;
-    const wrapper = document.querySelector('.slideshow-wrapper');
-    
-    wrapper.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-    });
-    
-    wrapper.addEventListener('touchend', (e) => {
-        const touchEndX = e.changedTouches[0].clientX;
-        const diff = touchStartX - touchEndX;
-        
-        if (Math.abs(diff) > 50) {
-            clearInterval(slideInterval);
-            if (diff > 0) {
-                currentSlide = (currentSlide + 1) % slides.length;
-            } else {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            }
-            showSlide(currentSlide);
-            startSlideshow();
-        }
-    });
     
     // Popup functions
-    function openPopup() {
-        document.getElementById('popup').style.display = 'flex';
+    function openPopup(popupId) {
+        document.getElementById(popupId).style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
     
-    function closePopup(e) {
-        if (e.target === document.getElementById('popup')) {
-            document.getElementById('popup').style.display = 'none';
+    function closePopup(e, popupId) {
+        if (e.target === document.getElementById(popupId)) {
+            document.getElementById(popupId).style.display = 'none';
             document.body.style.overflow = 'auto';
         }
     }
     
-    function closePopupBtn() {
-        document.getElementById('popup').style.display = 'none';
+    function closePopupBtn(popupId) {
+        document.getElementById(popupId).style.display = 'none';
         document.body.style.overflow = 'auto';
     }
     
-    // Start slideshow
-    startSlideshow();
+    // Start all slideshows
+    startSlideshow(1);
+    startSlideshow(2);
 </script>
 
 </body>
 </html>
-        
-    </cr>
-    
-</cr>
